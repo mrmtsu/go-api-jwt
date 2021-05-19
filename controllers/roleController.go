@@ -36,8 +36,8 @@ func CreateRole(c *fiber.Ctx) error {
 	}
 
 	role := models.Role{
-		Name:       roleDto["name"].(string),
-		Permission: permissions,
+		Name:        roleDto["name"].(string),
+		Permissions: permissions,
 	}
 
 	database.DB.Create(&role)
@@ -83,9 +83,9 @@ func UpdateRole(c *fiber.Ctx) error {
 	database.DB.Table("role_permissions").Where("role_id", id).Delete(&result)
 
 	role := models.Role{
-		Id:         uint(id),
-		Name:       roleDto["name"].(string),
-		Permission: permissions,
+		Id:          uint(id),
+		Name:        roleDto["name"].(string),
+		Permissions: permissions,
 	}
 
 	database.DB.Model(&role).Updates(role)
